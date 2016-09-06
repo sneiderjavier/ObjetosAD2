@@ -5,7 +5,9 @@
  */
 package interfaz;
 
+import clases.DenominadorCeroException;
 import clases.Fraccionario;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -127,28 +129,29 @@ public class Principal extends javax.swing.JFrame {
         d1 = Integer.parseInt(txtDenominador1.getText());
         n2 = Integer.parseInt(txtNumerador2.getText());
         d2 = Integer.parseInt(txtDenominador2.getText());
-
+try {
         f1 = new Fraccionario(n1, d1);
         f2 = new Fraccionario(n2, d2);
+        
+            switch (op) {
+                case 0:
+                    f3 = f1.sumar(f2);
+                    break;
 
-        switch (op) {
-            case 0:
-                f3 = f1.sumar(f2);
-                break;
+                case 1:
+                    f3 = f1.restar(f2);
+                    break;
 
-            case 1:
-                f3 = f1.restar(f2);
-                break;
-                
-            case 2:
-                f3 = f1.multiplicar(f2);
-                break;
-                
+                case 2:
+                    f3 = f1.multiplicar(f2);
+                    break;
 
+            }
+            txtNumerador3.setText("" + f3.getNumerador());
+            txtDenominador3.setText("" + f3.getDenominador());
+        } catch(DenominadorCeroException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        txtNumerador3.setText("" + f3.getNumerador());
-        txtDenominador3.setText("" + f3.getDenominador());
-
 
     }//GEN-LAST:event_cmdCalcularActionPerformed
 
@@ -161,7 +164,7 @@ public class Principal extends javax.swing.JFrame {
         txtDenominador3.setText("");
         txtNumerador1.requestFocusInWindow();
         cmbOperacion.setSelectedIndex(0);
-    
+
     }//GEN-LAST:event_cmdLimpiarActionPerformed
 
     /**
